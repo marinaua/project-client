@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package frame;
+package viewports;
 
 import com.marina.exception.IException;
 
@@ -24,6 +24,7 @@ public class ErrorForm extends javax.swing.JFrame {
         errorMessageLabel.setText(exeption.getMessage());
         errorCodeLabel.setText(String.valueOf(exeption.getCode()));  
         this.setVisible(true);
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 
     /**
@@ -40,6 +41,7 @@ public class ErrorForm extends javax.swing.JFrame {
         errorMessageLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Error frame");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

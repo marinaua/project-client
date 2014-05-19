@@ -7,16 +7,23 @@
 package client.model;
 
 import client.service.transfer.TransferClient;
-import com.marina.message.RequestMsg;
+import com.marina.entity.creditprogram.CreditProgram;
 import com.marina.message.ResponseMsg;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
  * @author Marik
  */
-public class CreditProgramModel {
-    public String[][] getCreditPrograms() throws IOException, ClassNotFoundException{
-        ResponseMsg msg = TransferClient.send("CreditProgram.getCreditPrograms", null);
+public class CreditProgramModel extends AbstractModel {
+
+    public ArrayList<CreditProgram> gerCreditPrograms() {
+        ResponseMsg msg = serverRequestData("CreditProgram.getCreditPrograms", null);
+        return (ArrayList<CreditProgram>)msg.getData();
+    }
+
+    public void updateCreditProgram(CreditProgram creditProgram) {
+        ResponseMsg msg = serverRequestData("CreditProgram.updateCreditProgram", creditProgram);
     }
 }

@@ -7,15 +7,16 @@
 package controller;
 
 import client.model.AuthorizationModel;
+import com.marina.message.ResponseMsg;
 import java.io.IOException;
 
 /**
  *
  * @author Marik
  */
-public class AuthorizationController {
-    public void authorize(String login, String password) throws IOException, ClassNotFoundException{
-        AuthorizationModel authorizationModel = new AuthorizationModel(login, password);
+public class AuthorizationController extends AbstractController {
+    public void authorize(String login, String password) {
+        AuthorizationModel authorizationModel = new AuthorizationModel();
         authorizationModel.authorization(login, password);
     }
 }

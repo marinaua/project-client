@@ -6,8 +6,8 @@
 package client.model;
 
 import client.Main;
+import com.marina.entity.user.User;
 import com.marina.message.ResponseMsg;
-import java.io.IOException;
 
 /**
  *
@@ -15,14 +15,21 @@ import java.io.IOException;
  */
 public class AuthorizationModel extends AbstractModel {
 
-    public AuthorizationModel(String login, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public AuthorizationModel() {
+      
     }
     
-    public ResponseMsg authorization(String login, String password) throws IOException, ClassNotFoundException {
+    public ResponseMsg authorization(String login, String password) {
         Main.currentUser.setLogin(login);
-        Main.currentUser.setLogin(password);
+        Main.currentUser.setPassword(password);
+        ResponseMsg response = serverRequestData("Authorization.login", Main.currentUser);
+        Main.currentUser = (User)response.getData();
+        Main.viewportModel.render(Main.currentUser);
         
-        return serverRequestData("Authorization.login", Main.currentUser);
+        return response;
+    }
+    
+    public ResponseMsg logout(){
+        return null;
     }
 }

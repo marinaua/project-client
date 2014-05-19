@@ -6,17 +6,27 @@
 
 package client;
 
-import controller.IndexController;
+import client.model.ViewportModel;
+import com.marina.entity.user.User;
+import java.io.IOException;
+import java.util.logging.LogManager;
 
 /**
  *
  * @author Marik
  */
 public class Bootstrap {
-
+    
     public Bootstrap() {
-        IndexController indexController = new IndexController();
-        indexController.indexAction();
+        try {
+            LogManager.getLogManager().readConfiguration(
+            Main.class.getResourceAsStream("/loggerconfig/logging.properties"));
+        } catch (IOException e) {
+            System.err.println("Could not setup logger configuration: " + e.toString());
+        }
+         Main.viewportModel = new ViewportModel();
+         Main.currentUser = new User();
+         Main.currentUser.setRole("guest");
     }
     
 }

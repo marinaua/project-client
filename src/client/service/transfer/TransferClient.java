@@ -5,11 +5,11 @@
  */
 package client.service.transfer;
 
+import client.Main;
+import com.marina.exception.NetworkException;
 import com.marina.message.RequestMsg;
 import com.marina.message.ResponseMsg;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -26,33 +26,44 @@ public class TransferClient {
     private static final int port = 12111;
     private static Socket clientSocket;
     private static ObjectInputStream networkIn;
-    private static ObjectOutputStream out;
-    private static BufferedReader userIn;
+    private static ObjectOutputStream networkOut;
+    private static Logger transferClientLogger = Logger.getLogger(TransferClient.class.getName());
+   
     
     private static void createConnection() {
         try {
             clientSocket = new Socket(hostname, port);
             //Get object from server
-            out = new ObjectOutputStream(clientSocket.getOutputStream());
+            networkOut = new ObjectOutputStream(clientSocket.getOutputStream());
             //Send object to server
             networkIn = new ObjectInputStream(clientSocket.getInputStream());
-            
-            userIn = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("Connected to echo server");
+           
         } catch (IOException ex) {
-            Logger.getLogger(TransferClient.class.getName()).log(Level.SEVERE, null, ex);
+            transferClientLogger.log(Level.SEVERE, "Exception in creating connection: ", ex);
         }
     }
 
-    public static ResponseMsg send(String command, Object object) throws IOException, ClassNotFoundException {
+    public static ResponseMsg send(String command, Object object) {
         if (clientSocket == null) {
             createConnection();
         }
-        out.writeObject(new RequestMsg(command, object));
-        out.flush();
+        try {
+            networkOut.writeObject(new RequestMsg(Main.currentUser, command, object));
+            networkOut.flush();
+        } catch (IOException ex) {
+            transferClientLogger.log(Level.SEVERE, "Exception in sending message: ", ex);
+        }
         
-        ResponseMsg response = (ResponseMsg) networkIn.readObject();
-        System.out.println("response: " + response);
+        
+        ResponseMsg response = new ResponseMsg(false, "", new NetworkException());
+        
+        try {
+            response = (ResponseMsg) networkIn.readObject();
+//            System.out.println("response: " + response);
+        } catch (IOException | ClassNotFoundException ex) {
+            transferClientLogger.log(Level.SEVERE, "Exception in receiving message: ", ex);
+        }
+        
         closeConnection();
         
         return response;
@@ -62,10 +73,15 @@ public class TransferClient {
         if (clientSocket != null) {
             try {
                 networkIn.close();
-                out.close();
+                networkOut.close();
                 clientSocket.close();
+                
+                clientSocket = null;
+                networkOut= null;
+                networkIn = null;
+//                System.out.println("Connection closed");
             } catch (IOException ex) {
-                Logger.getLogger(TransferClient.class.getName()).log(Level.SEVERE, null, ex);
+                transferClientLogger.log(Level.SEVERE, "Exception in closing connection: ", ex);
             }
 
         }

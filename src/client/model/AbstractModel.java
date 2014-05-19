@@ -8,17 +8,16 @@ package client.model;
 
 import client.service.transfer.TransferClient;
 import com.marina.message.ResponseMsg;
-import frame.ErrorForm;
-import java.io.IOException;
+import viewports.ErrorForm;
 
 /**
  *
  * @author Marik
  */
 public abstract class AbstractModel {
-    public ResponseMsg serverRequestData(String command, Object object) throws IOException, ClassNotFoundException{
+    public ResponseMsg serverRequestData(String command, Object object) {
         ResponseMsg msg = TransferClient.send(command, object);
-        if(msg.isError()){
+        if(!msg.isSuccess()){
             ErrorForm errorForm = new ErrorForm(msg.getData());
             //errorForm.setException(msg.getData());
         }

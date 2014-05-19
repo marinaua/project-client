@@ -2,20 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Marik/Documents/NetBeansProjects/creditserviceclient/src/frame/ClientForm.java</file>
-            <file>file:/C:/Users/Marik/Documents/NetBeansProjects/creditserviceclient/src/client/Main.java</file>
-            <file>file:/C:/Users/Marik/Documents/NetBeansProjects/creditserviceclient/src/controller/AbstractController.java</file>
-            <file>file:/C:/Users/Marik/Documents/NetBeansProjects/creditserviceclient/src/client/Bootstrap.java</file>
-            <file>file:/C:/Users/Marik/Documents/NetBeansProjects/creditserviceclient/src/client/model/AuthorizationModel.java</file>
-            <file>file:/C:/Users/Marik/Documents/NetBeansProjects/creditserviceclient/src/client/model/AbstractModel.java</file>
-            <file>file:/C:/Users/Marik/Documents/NetBeansProjects/creditserviceclient/src/controller/IndexController.java</file>
-            <file>file:/C:/Users/Marik/Documents/NetBeansProjects/creditserviceclient/src/controller/AuthorizationController.java</file>
-            <file>file:/C:/Users/Marik/Documents/NetBeansProjects/creditserviceclient/src/frame/ErrorForm.java</file>
-            <file>file:/C:/Users/Marik/Documents/NetBeansProjects/creditserviceclient/src/frame/LogForm.java</file>
-            <file>file:/C:/Users/Marik/Documents/NetBeansProjects/creditserviceclient/src/client/service/transfer/TransferClient.java</file>
-            <file>file:/C:/Users/Marik/Documents/NetBeansProjects/creditserviceclient/src/controller/iController.java</file>
-            <file>file:/C:/Users/Marik/Documents/NetBeansProjects/creditserviceclient/src/client/model/CreditProgramModel.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

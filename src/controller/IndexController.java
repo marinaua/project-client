@@ -6,16 +6,17 @@
 
 package controller;
 
-import frame.LogForm;
+import client.Main;
+import viewports.IndexViewport;
 
 /**
  *
  * @author Marik
  */
-public class IndexController {
+public class IndexController extends AbstractController {
 
     public void indexAction() {
-        new LogForm();
+        Main.viewportModel.render(Main.currentUser);
     }
     
 }
